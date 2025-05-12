@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/fondo_club"
+    android:padding="24dp"
+    tools:context=".MenuPrincipalActivity" >
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="44dp"
+        android:contentDescription="Logo del Club Deportivo"
+        android:src="@drawable/logo_gym" />
+
+    <Button
+        android:id="@+id/btnRegistrarCliente"
+        android:layout_width="231dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jejugothic_regular"
+        android:text="REGISTRAR CLIENTE"
+        android:backgroundTint="@color/btn_color"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/btnCobrarCuota"
+        android:layout_width= "231dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jejugothic_regular"
+        android:text="COBRAR CUOTA"
+        android:backgroundTint="@color/btn_color"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/btnListarVencimientos"
+        android:layout_width="231dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jejugothic_regular"
+        android:text="LISTAR VENCIMIENTOS"
+        android:backgroundTint="@color/btn_color"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="231dp"
+        android:fontFamily="@font/jejugothic_regular"
+        android:layout_height="wrap_content"
+        android:text="CERRAR SESION"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/btn_color"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>

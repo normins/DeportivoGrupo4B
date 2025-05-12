@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_club"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTRO DE CLIENTE"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Tipo y nro doc
+        <EditText
+            android:id="@+id/etTipoDocBuscar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:hint="Tipo y Nro.Doc."
+            android:textColorHint="#D9D1D1"
+            android:minHeight="48dp"
+            android:layout_marginBottom="8dp" />-->
+
+        <Button
+            android:id="@+id/btnBuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="BUSCAR"
+            android:layout_gravity="end"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- NOMBRE Y APELLIDO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="#E4DDDD"
+                android:minHeight="48dp"
+                android:text="Nombre y Apellido"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/etNombreApellido"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textColor="#211515"
+                android:textColorHint="#673AB7"
+                android:minHeight="48dp"
+                android:hint="Nombre y Apellido"
+                android:background="#BCB0D6"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Tipo y nro doc
+        <EditText
+            android:id="@+id/etTipoDoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:minHeight="48dp"
+            android:hint="Tipo y Nro Doc"
+            android:textColorHint="#988E8E"
+            android:layout_marginBottom="8dp" />-->
+
+        <!-- FECHA DE NACIMIENTO  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="#E4DDDD"
+                android:minHeight="48dp"
+                android:text="Fecha de Nacimiento"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/etFechaNacimiento"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textColorHint="#673AB7"
+                android:inputType="none"
+                android:minHeight="48dp"
+                android:hint="Fecha de Nacimiento"
+                android:focusable="false"
+                android:clickable="true"
+                android:background="#BCB0D6"
+                android:textColor="#211515"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <!-- TIPO DE CLIENTE  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="#E4DDDD"
+                android:minHeight="48dp"
+                android:text="Tipo de Cliente"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"/>
+
+            <Spinner
+                android:id="@+id/spTipoCliente"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textColor="#F44336"
+                android:textColorHint="#4CAF50"
+                android:minHeight="48dp"
+                android:background="#BCB0D6"
+                android:popupBackground="#BCB0D6"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+
+
+        <!-- CUOTA NO EDITABLE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/Cuota"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="#E4DDDD"
+                android:minHeight="48dp"
+                android:text="Cuota a abonar"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/txtCuota"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:background="#BCB0D6"
+                android:textColor="#211515"
+                android:textColorHint="#673AB7"
+                android:minHeight="48dp"
+                android:inputType="text"
+                android:hint="20.000"
+                android:textSize="16sp"
+                android:enabled="false"
+                android:focusable="false"/>
+        </LinearLayout>
+
+        <!-- Apto físico
+        <CheckBox
+            android:id="@+id/cbAptoFisico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#8D8686"
+            android:text="¿Apto físico?"
+            android:layout_marginBottom="8dp" />-->
+
+        <!-- Emitir carnet
+        <CheckBox
+            android:id="@+id/cbEmitirCarnet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#8D8686"
+            android:text="¿Emitir carnet?"
+            android:layout_marginBottom="8dp" />-->
+
+        <!-- Forma de pago  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="#E4DDDD"
+                android:minHeight="48dp"
+                android:text="Forma de Pago"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"/>
+
+            <Spinner
+                android:id="@+id/spFormaPago"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textColor="#F44336"
+                android:textColorHint="#4CAF50"
+                android:minHeight="48dp"
+                android:background="#BCB0D6"
+                android:popupBackground="#BCB0D6"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="32dp"
+            android:text="REGISTRAR" />
+
+    </LinearLayout>
+</ScrollView>

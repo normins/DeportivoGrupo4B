@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">DeportivoGrupo4B</string>
+
+    <!-- Textos para el Registro de Clientes -->
+
+    <string name="tipo_cliente_prompt">Seleccionar tipo de cliente</string>
+    <string name="cuota_prompt">Seleccionar tipo de cuota</string>
+    <string name="pago_prompt">Seleccionar forma de pago</string>
+
+    <!-- Otros strings...
+
+    <string-array name="tipo_cliente_array">
+        <item>Socio</item>
+        <item>No Socio</item>
+    </string-array>
+
+    <string-array name="cuota_array">
+        <item>Efectivo</item>
+        <item>3 Cuotas</item>
+        <item>6 Cuotas</item>
+    </string-array>
+
+    <string-array name="forma_pago_array">
+        <item>Efectivo</item>
+        <item>3 Cuotas</item>
+        <item>6 Cuotas</item>
+    </string-array>-->
+</resources>
