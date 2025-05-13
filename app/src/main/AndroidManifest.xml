@@ -13,6 +13,9 @@
         android:theme="@style/Theme.DeportivoGrupo4B"
         tools:targetApi="31">
         <activity
+            android:name=".gestion_decobro_activity"
+            android:exported="false" />
+        <activity
             android:name=".RegistroClienteActivity"
             android:exported="false" />
         <activity
