@@ -19,5 +19,12 @@ class MenuPrincipalActivity : AppCompatActivity() {
             val intent = Intent(this, RegistroClienteActivity::class.java)
             startActivity(intent)
         }
+
+        val btnCobrarCuota= findViewById<Button>(R.id.btnCobrarCuota)
+
+        btnCobrarCuota.setOnClickListener {
+            val intent = Intent(this, GestionDeCobroActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
