@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="24dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fondo3"
+    android:gravity="center">
+
+
+            <Button
+                android:id="@+id/btnImprimir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IMPRIMIR"
+                android:backgroundTint="@color/btn_color"
+                android:layout_marginTop="160dp"
+                android:layout_marginEnd="60dp"/>
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:backgroundTint="@color/btn_color"
+                android:text="CANCELAR" />
+
+
+
+</LinearLayout>
+

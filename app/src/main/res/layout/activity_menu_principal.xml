@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/fondo3"
+    android:background="@drawable/fondo4"
     android:padding="100dp"
     tools:context=".MenuPrincipalActivity"
     android:fitsSystemWindows="true">
