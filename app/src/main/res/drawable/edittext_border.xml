@@ -6,7 +6,7 @@
     <!-- Borde -->
     <stroke
         android:width="2dp"
-        android:color="#000508" />
+        android:color="#7144b5" />
 
     <solid android:color="#FFFFFF" />
 

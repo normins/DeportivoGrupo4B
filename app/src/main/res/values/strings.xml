@@ -16,6 +16,8 @@
     <string name="nombre_y_apellido">Nombre y Apellido:</string>
     <string name="listado_de_vencimientos">LISTADO DE VENCIMIENTOS</string>
     <string name="ingreso_fecha">Fecha de vencimiento</string>
+    <string name="fecha_de_vencimiento">Fecha de vencimiento</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
 
     <!-- Otros strings...
 

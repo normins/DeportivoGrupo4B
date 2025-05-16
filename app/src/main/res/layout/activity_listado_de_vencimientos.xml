@@ -21,8 +21,42 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="70dp"
         android:layout_gravity="center_horizontal" />
 
-</LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="167dp"
+            android:layout_height="match_parent"
+            android:minHeight="40dp"
+            android:text="@string/fecha_de_vencimiento"
+            android:textColor="#E4DDDD"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/seleccionar_fecha"
+            android:focusable="false" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnBuscarFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="130dp"
+        android:text="BUSCAR"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/btn_color"  />
+
+
+</LinearLayout>
