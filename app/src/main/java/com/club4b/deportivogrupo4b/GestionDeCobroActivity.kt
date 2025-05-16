@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.club4b.deportivogrupo4b.R.id.spFormaPago
 
 class GestionDeCobroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +16,7 @@ class GestionDeCobroActivity : AppCompatActivity() {
         // Lista de opciones
 
         val opcionesCobro = listOf("Efectivo", "3 cuotas", "6 cuotas")
+
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, opcionesCobro)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter

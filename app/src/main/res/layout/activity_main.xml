@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/fondo_club"
+    android:background="@drawable/fondoLogin"
     android:gravity="center_horizontal"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -15,7 +15,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="Logo del Club Deportivo"
-        android:src="@drawable/logo_gym"
+        android:src="@drawable/logo2"
         android:layout_marginBottom="44dp" />
 
     <EditText
@@ -61,7 +61,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿No tienes una cuenta?"
+        android:text="@string/no_tienes_una_cuenta"
         android:fontFamily="@font/jejugothic_regular"
         android:textColor="#CCCCCC"
         android:layout_marginTop="20dp"

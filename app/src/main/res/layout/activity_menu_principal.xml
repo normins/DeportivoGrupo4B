@@ -5,17 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/fondo_club"
+    android:background="@drawable/fondo3"
     android:padding="24dp"
     tools:context=".MenuPrincipalActivity" >
 
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="44dp"
-        android:contentDescription="Logo del Club Deportivo"
-        android:src="@drawable/logo_gym" />
+
 
     <Button
         android:id="@+id/btnRegistrarCliente"
@@ -25,7 +19,7 @@
         android:text="REGISTRAR CLIENTE"
         android:backgroundTint="@color/btn_color"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="30dp"/>
 
     <Button
