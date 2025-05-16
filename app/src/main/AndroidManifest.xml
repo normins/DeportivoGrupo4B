@@ -13,10 +13,7 @@
         android:theme="@style/Theme.DeportivoGrupo4B"
         tools:targetApi="31">
         <activity
-            android:name=".Navegador"
-            android:exported="false" />
-        <activity
-            android:name=".ListadoDeVencimientos"
+            android:name="ListadoDeVencimientosActivity"
             android:exported="false" />
         <activity
             android:name=".GestionDeCobroActivity"

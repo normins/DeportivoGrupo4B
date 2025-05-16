@@ -29,8 +29,9 @@ class MenuPrincipalActivity : AppCompatActivity() {
         }
 
         val btnListarVencimientos= findViewById<Button>(R.id.btnListarVencimientos)
+
         btnListarVencimientos.setOnClickListener {
-            val intent = Intent(this, GestionDeCobroActivity::class.java)
+            val intent = Intent(this,ListadoDeVencimientosActivity::class.java)
             startActivity(intent)
         }
     }
