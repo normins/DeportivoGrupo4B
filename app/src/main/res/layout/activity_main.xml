@@ -8,7 +8,8 @@
     android:background="@drawable/fondolog"
     android:gravity="center_horizontal"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
 
     <ImageView
         android:id="@+id/logoImageView"
