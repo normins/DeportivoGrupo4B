@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@drawable/fondo3"
-    android:padding="24dp"
+    android:padding="100dp"
     tools:context=".MenuPrincipalActivity" >
 
 
@@ -53,5 +53,6 @@
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/btn_color"
         android:textColor="#FFFFFF"/>
+
 
 </LinearLayout>
