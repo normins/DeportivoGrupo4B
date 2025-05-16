@@ -1,8 +1,12 @@
 package com.club4b.deportivogrupo4b
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class GestionDeCobroActivity : AppCompatActivity() {
@@ -21,11 +25,14 @@ class GestionDeCobroActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
+        //Retornar con la imagen de flecha
+        val back1 = findViewById<ImageView>(R.id.back1)
+        back1.setOnClickListener {
+            val intent = Intent(this, MenuPrincipalActivity::class.java)
+            startActivity(intent)
 
-
-
+        }
     }
-
 }
 
 

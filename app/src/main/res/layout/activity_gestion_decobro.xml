@@ -7,12 +7,16 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 android:background="@drawable/fondo3"
-android:gravity="center_horizontal"
-android:padding="16dp"
+android:padding="20dp"
 android:fitsSystemWindows="true"
 tools:context=".GestionDeCobroActivity"
 >
-
+    <ImageView
+        android:id="@+id/back1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/outline_arrow_back_24"/>
 
     <TextView
 
@@ -56,7 +60,7 @@ tools:context=".GestionDeCobroActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginStart="130dp"
+        android:layout_marginStart="250dp"
         android:text="BUSCAR"
         android:textColor="#FFFFFF"
         android:backgroundTint="@color/btn_color"  />

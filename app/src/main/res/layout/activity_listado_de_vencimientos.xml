@@ -7,11 +7,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/fondo3"
-    android:gravity="center_horizontal"
-    android:padding="16dp"
+    android:padding="20dp"
     tools:context=".ListadoDeVencimientosActivity">
 
 
+    <ImageView
+        android:id="@+id/back2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:src="@drawable/outline_arrow_back_24"/>
 
     <TextView
         android:layout_width="wrap_content"

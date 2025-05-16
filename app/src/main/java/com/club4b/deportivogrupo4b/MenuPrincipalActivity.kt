@@ -34,5 +34,13 @@ class MenuPrincipalActivity : AppCompatActivity() {
             val intent = Intent(this,ListadoDeVencimientosActivity::class.java)
             startActivity(intent)
         }
+
+        val btnCerrarSesion= findViewById<Button>(R.id.btnCerrarSesion)
+
+        btnCobrarCuota.setOnClickListener{
+            val intent= Intent(this, MainActivity ::class.java)
+        startActivity(intent)
+
+       }
     }
 }

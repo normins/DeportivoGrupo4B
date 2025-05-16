@@ -1,9 +1,11 @@
 package com.club4b.deportivogrupo4b
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,5 +27,14 @@ class ListadoDeVencimientosActivity : AppCompatActivity() {
             }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
             datePicker.show()
         }
+
+
+            //Retornar con la imagen de flecha
+            val back2 = findViewById<ImageView>(R.id.back2)
+            back2.setOnClickListener {
+                val intent = Intent(this, MenuPrincipalActivity::class.java)
+                startActivity(intent)
+            }
+
     }
 }
