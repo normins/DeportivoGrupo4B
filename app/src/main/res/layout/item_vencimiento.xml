@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/fondo3">
+
+
+
+    <TextView
+        android:id="@+id/txtNroDoc"
+        android:layout_width="20dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Numero Doc"
+        android:textSize="13dp"
+        android:fontFamily="@font/jejugothic_regular"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="10dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="13dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/jejugothic_regular" />
+
+    <TextView
+        android:id="@+id/txtApellido"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Apellido"
+        android:textSize="13dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/jejugothic_regular"/>
+
+
+
+
+</LinearLayout>
