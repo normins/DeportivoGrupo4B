@@ -59,13 +59,4 @@
         android:textSize="16sp"
         android:textColor="#FFFFFF" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_tienes_una_cuenta"
-        android:fontFamily="@font/jejugothic_regular"
-        android:textColor="#CCCCCC"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp" />
-
 </LinearLayout>
