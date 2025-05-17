@@ -5,22 +5,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/fondo4"
-    android:padding="100dp"
+    android:background="@drawable/fondolog"
+    android:padding="80dp"
     tools:context=".MenuPrincipalActivity"
     android:fitsSystemWindows="true">
 
-
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="Logo del Club Deportivo"
+        android:src="@drawable/logo2"
+        android:layout_marginBottom="44dp" />
 
     <Button
         android:id="@+id/btnRegistrarCliente"
         android:layout_width="231dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/jejugothic_regular"
-        android:text="REGISTRAR CLIENTE"
+        android:text="REGISTRO DE CLIENTE"
         android:backgroundTint="@color/btn_color"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="30dp"/>
 
     <Button
@@ -28,7 +34,7 @@
         android:layout_width= "231dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/jejugothic_regular"
-        android:text="COBRAR CUOTA"
+        android:text="GESTIÓN DE COBRO"
         android:backgroundTint="@color/btn_color"
         android:textColor="#FFFFFF"
         android:layout_marginTop="20dp"
@@ -39,7 +45,7 @@
         android:layout_width="231dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/jejugothic_regular"
-        android:text="LISTAR VENCIMIENTOS"
+        android:text="LISTADO DE VENCIMIENTOS"
         android:backgroundTint="@color/btn_color"
         android:textColor="#FFFFFF"
         android:layout_marginTop="20dp"
