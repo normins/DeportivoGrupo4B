@@ -10,6 +10,7 @@
     <string name="logo_del_club_deportivo1">Logo del Club Deportivo</string>
     <string name="gestion_de_cobro">GESTION DE COBRO</string>
     <string name="n_mero_documento">Número Documento</string>
+    <string name="numeroDocumento">Número Documento</string>
     <string name="forma_de_pago">Forma De Pago:</string>
     <string name="confirmar">CONFIRMAR</string>
     <string name="no_tienes_una_cuenta">¿No tienes una cuenta?</string>

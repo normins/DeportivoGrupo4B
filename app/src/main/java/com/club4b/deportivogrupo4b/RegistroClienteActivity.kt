@@ -1,6 +1,7 @@
 package com.club4b.deportivogrupo4b
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
@@ -32,7 +34,14 @@ class RegistroClienteActivity: AppCompatActivity() {
         val btnBuscar = findViewById<Button>(R.id.btnBuscar)
         val grupoDatosCliente = findViewById<LinearLayout>(R.id.grupoDatosCliente)
 
-        btnBuscar.setOnClickListener {
+        //Retornar con la imagen de flecha
+        val back1 = findViewById<ImageView>(R.id.back1)
+        back1.setOnClickListener {
+            val intent = Intent(this, MenuPrincipalActivity::class.java)
+            startActivity(intent) }
+
+
+            btnBuscar.setOnClickListener {
             val docIngresado = etDocumento.text.toString()
 
             if (clientesRegistrados.contains(docIngresado)) {

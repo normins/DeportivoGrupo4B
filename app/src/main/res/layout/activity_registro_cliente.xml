@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo4"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".RegistroClienteActivity">
+
+    <ImageView
+        android:id="@+id/back1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/outline_arrow_back_24"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +22,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="7dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,17 +44,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="@string/n_mero_documento"
+                android:text="Número de Documento"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/etDocumento"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
+                android:layout_weight="4"
+                android:background="@drawable/edittext_border"
+                android:textColor="#211515"
+                android:paddingLeft="7dp"
+                android:minHeight="55dp"
+                android:layout_marginBottom="8dp"
+                android:hint=" Ingrese aquí  "
+                android:textSize="18sp" />
         </LinearLayout>
 
 
@@ -54,6 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/btn_color"
             android:text="BUSCAR"
@@ -94,20 +109,9 @@
                     android:hint="Nombre y Apellido"
                     android:minHeight="48dp"
                     android:textColor="#211515"
-                    android:textColorHint="#673AB7"
+                    android:textColorHint="#A995D8"
                     android:textSize="16sp" />
             </LinearLayout>
-
-            <!-- Tipo y nro doc
-            <EditText
-                android:id="@+id/etTipoDoc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:minHeight="48dp"
-                android:hint="Tipo y Nro Doc"
-                android:textColorHint="#988E8E"
-                android:layout_marginBottom="8dp" />-->
 
             <!-- FECHA DE NACIMIENTO  -->
             <LinearLayout
@@ -138,7 +142,7 @@
                     android:inputType="none"
                     android:minHeight="48dp"
                     android:textColor="#211515"
-                    android:textColorHint="#673AB7"
+                    android:textColorHint="#A995D8"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -199,6 +203,7 @@
                     android:layout_weight="2"
                     android:background="@drawable/edittext_border"
                     android:enabled="false"
+
                     android:focusable="false"
                     android:hint="20.000"
                     android:inputType="text"
@@ -210,7 +215,7 @@
 
             <!-- Apto físico -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
@@ -231,17 +236,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="18dp"
                     android:textColor="#8D8686" />
             </LinearLayout>
 
             <!-- Emitir carnet -->
-            <CheckBox
-                android:id="@+id/cbEmitirCarnet"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="¿Emitir carnet?"
-                android:textColor="#8D8686" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/EmitirCarnet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="¿Emitir carnet?"
+                    android:textColor="#E4DDDD"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/cbEmitirCarnet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="#8D8686" />
+            </LinearLayout>
 
             <!-- Forma de pago  -->
             <LinearLayout
@@ -284,4 +308,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>
