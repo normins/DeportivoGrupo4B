@@ -15,6 +15,23 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "UsuariosDB", n
             )
         """.trimIndent())
 
+        db.execSQL("""
+            CREATE TABLE clientes (
+                id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT ,
+                apellido TEXT,
+                tipo_documento TEXT,
+                nro_documento  TEXT,
+                fecha_nacimiento TEXT,
+                fecha_inscripcion TEXT,
+                apto_fisico INTEGER,
+                tipo_cliente TEXT,
+                estado_carnet INTEGER,
+                esMoroso INTEGER
+            )
+        """.trimIndent())
+
+
         db.execSQL("INSERT INTO usuarios (nombre, contrasena) VALUES ('admin', '1234')")
     }
 
