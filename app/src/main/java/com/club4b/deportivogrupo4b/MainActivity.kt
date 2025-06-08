@@ -11,20 +11,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var dbHelper: UserDBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Referencia al botón
-        val loginButton = findViewById<Button>(R.id.btnLogin)
-
-        loginButton.setOnClickListener {
-            val intent = Intent(this, MenuPrincipalActivity::class.java)
-            startActivity(intent)
-            finish() // evita volver atrás, al login
-        }
-
-        val dbHelper = UserDBHelper (this)
+        dbHelper = UserDBHelper (this)
 
         val user = findViewById<EditText>(R.id.etUserName)
         val pass = findViewById<EditText>(R.id.etPassword)
@@ -36,12 +30,15 @@ class MainActivity : AppCompatActivity() {
             val passString= pass.text.toString().trim()
 
             if (dbHelper.login(userString,passString)) {
-                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Bienvenido $userString", Toast.LENGTH_SHORT).show()
                 val intent= Intent (this, MenuPrincipalActivity :: class.java)
                 startActivity(intent)
             }
             else{
                 Toast.makeText(this, "Usuario o Contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                user.text.clear()
+                pass.text.clear()
+                user.requestFocus()
             }
 
         }

@@ -21,7 +21,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "UsuariosDB", n
                 nombre TEXT ,
                 apellido TEXT,
                 tipo_documento TEXT,
-                nro_documento  TEXT,
+                nro_documento  TEXT UNIQUE,
                 fecha_nacimiento TEXT,
                 fecha_inscripcion TEXT,
                 apto_fisico INTEGER,
