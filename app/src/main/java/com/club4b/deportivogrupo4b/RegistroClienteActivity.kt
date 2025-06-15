@@ -30,6 +30,8 @@ class RegistroClienteActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro_cliente)
 
+        val dbHelper = UserDBHelper(this)
+
         val etDocumento = findViewById<EditText>(R.id.etDocumento)
         val btnBuscar = findViewById<Button>(R.id.btnBuscar)
         val grupoDatosCliente = findViewById<LinearLayout>(R.id.grupoDatosCliente)
