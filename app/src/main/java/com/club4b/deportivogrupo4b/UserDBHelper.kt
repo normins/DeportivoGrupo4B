@@ -1,5 +1,6 @@
 package com.club4b.deportivogrupo4b
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -73,6 +74,9 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
                 "VALUES (2036,'Pilates','Lu-Mi-Vi 10-11',11,7000)" )
         db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
                 "VALUES (2037,'Yoga','Lu-Mi-Vi 8-9',11,8000)" )
+
+        //para simular gestion de cobro
+        db.execSQL("INSERT INTO clientes (nro_documento, nombre, apellido) VALUES ('35703124', 'Gilda' , 'Morgante')")
     }
 
     override fun onUpgrade(db:SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -85,14 +89,42 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
     }
 
     fun login (nombre: String, contrasena: String): Boolean {
-        val db= readableDatabase
-        val cursor= db.rawQuery(
+        val db = readableDatabase
+        val cursor = db.rawQuery(
             "SELECT * FROM usuarios WHERE nombre=? and contrasena=?",
             arrayOf(nombre, contrasena)
         )
 
         val existe= cursor.count>0
         return existe
+    }
+
+    fun insertarCobro (anio: Int,
+                       mes: Int,
+                       cliente: Int,
+                       importe: Double,
+                       fechaVencimiento: String,
+                       formaPago: Int,
+                       pagado: Int): Boolean {
+
+        val db= this.writableDatabase
+
+
+        val valores = ContentValues().apply{
+            put("anio_id",anio)
+            put("mes_id", mes)
+            put("cliente_id", cliente)
+            put("importe", importe)
+            put("fechaVencimiento", fechaVencimiento)
+            put("formaPago", formaPago)
+            put("pagado", pagado)
+        }
+
+        val resultado = db.insert("cobros", null, valores)
+        db.close()
+
+        return resultado != -1L
+
     }
 
 
