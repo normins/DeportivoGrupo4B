@@ -101,15 +101,19 @@
                         android:layout_weight="1"
                         android:minHeight="40dp"
                         android:text="@string/nombre_y_apellido"
-                        android:textColor="#E4DDDD"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/etNombreApellido"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/etnombreApellido"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="2"
                         android:hint="Nombre y apellido"
-                        android:enabled="false" />
+                        android:enabled="false"
+                        android:textColor="#FFFFFF"
+                        android:minHeight="45dp"
+                        android:textSize="16sp" />
                         />
                 </LinearLayout>
 
@@ -126,8 +130,20 @@
                         android:layout_weight="1"
                         android:minHeight="40dp"
                         android:text="Tipo de Cliente:"
-                        android:textColor="#E4DDDD"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/etipodeCliente"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="Tipo de Cliente"
+                        android:enabled="false"
+                        android:textColor="#FFFFFF"
+                        android:minHeight="45dp"
+                        android:textSize="16sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -143,12 +159,16 @@
                         android:layout_weight="1"
                         android:minHeight="40dp"
                         android:text="Fecha de vencimiento:"
-                        android:textColor="#E4DDDD"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
 
                     <EditText
+                        android:id="@+id/etfechaVencimiento"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:textColor="#FFFFFF"/>
+
                 </LinearLayout>
 
                 <LinearLayout

@@ -6,18 +6,21 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.ContactsContract.Intents.Insert
 
-class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 8) {
+class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 11) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("""
+        db.execSQL(
+            """
             CREATE TABLE usuarios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT UNIQUE,
                 contrasena TEXT
             )
-        """.trimIndent())
+        """.trimIndent()
+        )
 
-        db.execSQL("""
+        db.execSQL(
+            """
             CREATE TABLE clientes (
                 id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT ,
@@ -30,9 +33,11 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
                 estado_carnet INTEGER,
                 esMoroso INTEGER
             )
-        """.trimIndent())
+        """.trimIndent()
+        )
 
-        db.execSQL("""
+        db.execSQL(
+            """
             CREATE TABLE actividades (
                 id INTEGER PRIMARY KEY,
                 nombre TEXT ,
@@ -40,9 +45,11 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
                 cupoTotal INTEGER,
                 precio FLOAT
             )
-        """.trimIndent())
+        """.trimIndent()
+        )
 
-        db.execSQL("""
+        db.execSQL(
+            """
             CREATE TABLE cobros (
                 anio_id  INTEGER,
                 mes_id INTEGER,
@@ -54,78 +61,109 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
                 PRIMARY KEY (anio_id, mes_id, cliente_id),
                 FOREIGN KEY (cliente_id) REFERENCES clientes(id_cliente)
                 )
-        """.trimIndent())
+        """.trimIndent()
+        )
 
         db.execSQL("INSERT INTO usuarios (nombre, contrasena) VALUES ('admin', '1234')")
 
-        db.execSQL( "INSERT INTO actividades(id,nombre, horario, cupoTotal, precio)" +
-                "VALUES (1000,'Cuota social','Cuota social',0,150000)" )
-        db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
-                "VALUES (2059,'Musculación','Todos los días',20,10000)" )
-        db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
-                "VALUES (2060,'Spinning','Ma-Ju-Sa 18-19',10,7000)" )
-        db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
-                "VALUES (2063,'Boxeo','Lu-Mi-Vi 20-22',10,5000)" )
-        db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
-                "VALUES (2034,'Natación','Ma-Ju-Sa 7-10',20,10000)" )
-        db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
-                "VALUES (2035,'Tenis','Ma-Ju-Sa 15-16',10,5000)" )
-        db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
-                "VALUES (2036,'Pilates','Lu-Mi-Vi 10-11',11,7000)" )
-        db.execSQL( "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
-                "VALUES (2037,'Yoga','Lu-Mi-Vi 8-9',11,8000)" )
-
-        //para simular gestion de cobro
-        db.execSQL("INSERT INTO clientes (nro_documento, nombre, apellido) VALUES ('35703124', 'Gilda' , 'Morgante')")
-    }
-
-    override fun onUpgrade(db:SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-
-        db.execSQL("DROP TABLE IF EXISTS usuarios")
-        db.execSQL("DROP TABLE IF EXISTS clientes")
-        db.execSQL("DROP TABLE IF EXISTS actividades")
-        db.execSQL("DROP TABLE IF EXISTS cobros")
-        onCreate(db)
-    }
-
-    fun login (nombre: String, contrasena: String): Boolean {
-        val db = readableDatabase
-        val cursor = db.rawQuery(
-            "SELECT * FROM usuarios WHERE nombre=? and contrasena=?",
-            arrayOf(nombre, contrasena)
+        db.execSQL(
+            "INSERT INTO actividades(id,nombre, horario, cupoTotal, precio)" +
+                    "VALUES (1000,'Cuota social','Cuota social',0,150000)"
+        )
+        db.execSQL(
+            "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
+                    "VALUES (2059,'Musculación','Todos los días',20,10000)"
+        )
+        db.execSQL(
+            "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
+                    "VALUES (2060,'Spinning','Ma-Ju-Sa 18-19',10,7000)"
+        )
+        db.execSQL(
+            "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
+                    "VALUES (2063,'Boxeo','Lu-Mi-Vi 20-22',10,5000)"
+        )
+        db.execSQL(
+            "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
+                    "VALUES (2034,'Natación','Ma-Ju-Sa 7-10',20,10000)"
+        )
+        db.execSQL(
+            "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
+                    "VALUES (2035,'Tenis','Ma-Ju-Sa 15-16',10,5000)"
+        )
+        db.execSQL(
+            "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
+                    "VALUES (2036,'Pilates','Lu-Mi-Vi 10-11',11,7000)"
+        )
+        db.execSQL(
+            "INSERT INTO actividades(id, nombre, horario, cupoTotal, precio)" +
+                    "VALUES (2037,'Yoga','Lu-Mi-Vi 8-9',11,8000)"
         )
 
-        val existe= cursor.count>0
-        return existe
+        //para simular busqueda en activity gestion de cobro
+        db.execSQL(
+            "INSERT INTO clientes( id_cliente, nro_documento, fecha_nacimiento," +
+                    " nombre, apellido,fecha_inscripcion, apto_fisico, tipo_cliente," +
+                    " estado_carnet, esMoroso)"+
+                    "VALUES (1, '35703124', '1990-01-01', 'Gilda', 'Morgante', " +
+                    "'2023-01-01', 1, 'Socio', 1, 0)")
+
+        //para simular la busqueda en activity gestion de cobro y ver fecha de vto
+
+        db.execSQL(
+            "INSERT INTO cobros(anio_id, mes_id, cliente_id,importe, fechaVencimiento, formapago, pagado)"
+                    + "VALUES (2025,06, 1,2000, '12/06/2025',[0],2000)")
+
     }
 
-    fun insertarCobro (anio: Int,
-                       mes: Int,
-                       cliente: Int,
-                       importe: Double,
-                       fechaVencimiento: String,
-                       formaPago: Int,
-                       pagado: Int): Boolean {
 
-        val db= this.writableDatabase
+        override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
-
-        val valores = ContentValues().apply{
-            put("anio_id",anio)
-            put("mes_id", mes)
-            put("cliente_id", cliente)
-            put("importe", importe)
-            put("fechaVencimiento", fechaVencimiento)
-            put("formaPago", formaPago)
-            put("pagado", pagado)
+            db.execSQL("DROP TABLE IF EXISTS usuarios")
+            db.execSQL("DROP TABLE IF EXISTS clientes")
+            db.execSQL("DROP TABLE IF EXISTS actividades")
+            db.execSQL("DROP TABLE IF EXISTS cobros")
+            onCreate(db)
         }
 
-        val resultado = db.insert("cobros", null, valores)
-        db.close()
+        fun login(nombre: String, contrasena: String): Boolean {
+            val db = readableDatabase
+            val cursor = db.rawQuery(
+                "SELECT * FROM usuarios WHERE nombre=? and contrasena=?",
+                arrayOf(nombre, contrasena)
+            )
 
-        return resultado != -1L
+            val existe = cursor.count > 0
+            return existe
+        }
+
+        fun insertarCobro(
+            anio: Int,
+            mes: Int,
+            cliente: Int,
+            importe: Double,
+            fechaVencimiento: String,
+            formaPago: Int,
+            pagado: Int
+        ): Boolean {
+
+            val db = this.writableDatabase
+
+
+            val valores = ContentValues().apply {
+                put("anio_id", anio)
+                put("mes_id", mes)
+                put("cliente_id", cliente)
+                put("importe", importe)
+                put("fechaVencimiento", fechaVencimiento)
+                put("formaPago", formaPago)
+                put("pagado", pagado)
+            }
+
+            val resultado = db.insert("cobros", null, valores)
+            db.close()
+
+            return resultado != -1L
+
+        }
 
     }
-
-
-}

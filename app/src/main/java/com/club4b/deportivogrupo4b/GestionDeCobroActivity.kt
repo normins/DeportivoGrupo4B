@@ -44,7 +44,9 @@ class GestionDeCobroActivity : AppCompatActivity() {
         val btnBuscarCobro = findViewById<Button>(R.id.btnBuscarCobro)
         val grupoDatosClienteCobro = findViewById<LinearLayout>(R.id.grupoDatosClienteCobro)
         val etDocumento= findViewById<EditText>(R.id.etDocumento)
-        val etNombreApellido=findViewById<EditText>(R.id.etNombreApellido)
+        val etnombreApellido=findViewById<EditText>(R.id.etnombreApellido)
+        val etipoCliente=findViewById<EditText>(R.id.etipodeCliente)
+        val etfechaVencimiento=findViewById<EditText>(R.id.etfechaVencimiento)
 
 
             btnBuscarCobro.setOnClickListener {
@@ -61,16 +63,31 @@ class GestionDeCobroActivity : AppCompatActivity() {
                 val dbHelper= UserDBHelper(this)
                 val db= dbHelper.readableDatabase
 
-                val cursor = db.rawQuery("SELECT  nro_documento, nombre, apellido FROM clientes WHERE nro_documento = ?", arrayOf(dniBuscado))
+                //busca los valores en las tablas existentes para devolverlos en la activity.
+                val cursor = db.rawQuery(
+                    """
+                    SELECT c.nro_documento, c.nombre, c.apellido, c.tipo_cliente, co.fechaVencimiento
+                    FROM clientes c 
+                    JOIN cobros co ON co.cliente_id = c.id_cliente
+                    WHERE c.nro_documento = ?
+                     """.trimIndent(),
+                    arrayOf(dniBuscado)
+                )
 
                 if (cursor.moveToFirst()) {
                     // Si encontró el cliente
                     val nro_documento = cursor.getString(0)
                     val nombre = cursor.getString(1)
                     val apellido = cursor.getString(2)
+                    val tipo_cliente=cursor.getString(3)
+                    val fechaVencimiento=cursor.getString(4)
+
+
 
                     etDocumento.setText(nro_documento)
-                    etNombreApellido.setText("$nombre $apellido") // Une nombre y apellido
+                    etnombreApellido.setText("$nombre $apellido") // Une nombre y apellido
+                    etipoCliente.setText(tipo_cliente)
+                    etfechaVencimiento.setText(fechaVencimiento)
 
                     grupoDatosClienteCobro.visibility = View.VISIBLE
                     btnBuscarCobro.visibility = View.GONE
