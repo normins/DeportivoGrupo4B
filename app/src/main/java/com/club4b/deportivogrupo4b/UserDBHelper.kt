@@ -171,7 +171,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
                 val nombre = cursor.getString(0)
                 val horario = cursor.getString(1)
                 val precio = cursor.getString(2)
-                actividades.add("$nombre - $horario -  $precio")
+                actividades.add("$nombre - $horario - $precio")
             } while (cursor.moveToNext())
         // Usar actividades para llenar el ListView
         }
