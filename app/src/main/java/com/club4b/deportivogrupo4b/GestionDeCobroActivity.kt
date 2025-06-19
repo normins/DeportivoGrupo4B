@@ -49,7 +49,7 @@ class GestionDeCobroActivity : AppCompatActivity() {
         val etfechaVencimiento=findViewById<EditText>(R.id.etfechaVencimiento)
 
 
-            btnBuscarCobro.setOnClickListener {
+        btnBuscarCobro.setOnClickListener {
                 // Mostrar el grupo de datos validando el doc
                 val dniBuscado= etDocumento.text.toString()
 

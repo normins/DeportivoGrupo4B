@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="167dp"
             android:layout_height="match_parent"
-            android:minHeight="40dp"
+            android:minHeight="45dp"
             android:text="@string/fecha_de_vencimiento"
             android:textColor="#E4DDDD"
             android:textSize="20sp" />
@@ -61,6 +61,7 @@
             android:id="@+id/editFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:hint="@string/seleccionar_fecha"
             android:focusable="false" />
 

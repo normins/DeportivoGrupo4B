@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="Numero Doc"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:fontFamily="@font/jejugothic_regular"
         android:textColor="@color/black"/>
 
@@ -26,7 +26,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="Nombre"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:textColor="@color/black"
         android:fontFamily="@font/jejugothic_regular" />
 
@@ -36,7 +36,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="Apellido"
-        android:textSize="13dp"
+        android:textSize="13sp"
         android:textColor="@color/black"
         android:fontFamily="@font/jejugothic_regular"/>
 

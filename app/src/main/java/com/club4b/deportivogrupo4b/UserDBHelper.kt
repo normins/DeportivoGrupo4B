@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 
 
-class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 11) {
+class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 15) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
@@ -113,7 +113,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
 
         db.execSQL(
             "INSERT INTO cobros(anio_id, mes_id, cliente_id,importe, fechaVencimiento, formapago, pagado)"
-                    + "VALUES (2025,06, 1,2000, '12/06/2025',[0],2000)")
+                    + "VALUES (2025,06, 1,2000, '12/06/2025',0,2000)")
 
 
     }
@@ -180,7 +180,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
     }
 
 
-        override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
             db.execSQL("DROP TABLE IF EXISTS usuarios")
             db.execSQL("DROP TABLE IF EXISTS clientes")
@@ -189,7 +189,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
             onCreate(db)
         }
 
-        fun login(nombre: String, contrasena: String): Boolean {
+    fun login(nombre: String, contrasena: String): Boolean {
             val db = readableDatabase
             val cursor = db.rawQuery(
                 "SELECT * FROM usuarios WHERE nombre=? and contrasena=?",
@@ -200,7 +200,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
             return existe
         }
 
-        fun insertarCobro(
+    /*fun insertarCobro(
             anio: Int,
             mes: Int,
             cliente: Int,
@@ -228,7 +228,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
 
             return resultado != -1L
 
-        }
+        }*/
 
     }
 
