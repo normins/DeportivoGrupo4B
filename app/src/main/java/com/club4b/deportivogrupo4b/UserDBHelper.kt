@@ -1,9 +1,12 @@
 package com.club4b.deportivogrupo4b
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.provider.ContactsContract.Intents.Insert
+import android.util.Log
+import android.widget.Toast
+
 
 class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 8) {
 
@@ -90,10 +93,68 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
             "SELECT * FROM usuarios WHERE nombre=? and contrasena=?",
             arrayOf(nombre, contrasena)
         )
-
         val existe= cursor.count>0
+        cursor.close()
         return existe
     }
 
+    fun insertarCliente (nombre: String, apellido:String, nroDocumento:String,
+                         fechaNacimiento:String, fechaInscripcion:String,
+                         aptoFisico:Int, tipoCliente:String,
+                         estadoCarnet:Int, esMoroso:Int): Boolean{
 
+        val db = writableDatabase
+        val valores = ContentValues().apply{
+            put("nombre", nombre)
+            put("apellido", apellido)
+            put("nro_documento", nroDocumento)
+            put("fecha_nacimiento", fechaNacimiento)
+            put("fecha_inscripcion", fechaInscripcion)
+            put("apto_fisico", aptoFisico)
+            put("tipo_cliente", tipoCliente)
+            put("estado_carnet", estadoCarnet)
+            put("esMoroso", esMoroso)
+        }
+
+        Log.d("DB", "Insertando cliente: $nombre $apellido $nroDocumento")
+        val resultado = db.insert("clientes", null, valores)
+        Log.d("DB", "Resultado inserción: $resultado")
+
+        return resultado != -1L
+    }
+
+
+    fun obtenerClientes(): List<String> {
+        val clientes = mutableListOf<String>()
+        val db = readableDatabase
+        val cursor =db.rawQuery("SELECT nombre, apellido, nro_documento FROM clientes",null)
+        if (cursor.moveToFirst())
+            do {
+                val nombre = cursor.getString(0)
+                val apellido = cursor.getString(1)
+                val nroDocumento = cursor.getString(2)
+                clientes.add("$nroDocumento - $nombre $apellido")
+            } while (cursor.moveToNext())
+
+        cursor.close()
+        return clientes
+    }
+
+
+    fun obtenerActividades(): List<String> {
+        val actividades = mutableListOf<String>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT nombre, horario, precio FROM actividades", null)
+        if (cursor.moveToFirst()){
+            do {
+                val nombre = cursor.getString(0)
+                val horario = cursor.getString(1)
+                val precio = cursor.getString(2)
+                actividades.add("$nombre - $horario -  $precio")
+            } while (cursor.moveToNext())
+        // Usar actividades para llenar el ListView
+        }
+        cursor.close()
+        return actividades
+    }
 }

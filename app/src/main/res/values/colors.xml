@@ -5,4 +5,6 @@
 
     <color name="btn_color">#00AAA3</color>
     <color name="spinner_text_color">#F44336</color>
+    <color name="resaltado_ingresar_datos_color">#C8F0A7</color>
+    <color name="resaltado_ingresado_color">#00AAA3</color>
 </resources>

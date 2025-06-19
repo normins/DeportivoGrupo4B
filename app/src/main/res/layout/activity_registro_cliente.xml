@@ -12,13 +12,14 @@
         android:id="@+id/back1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
+        android:contentDescription="@null"
         android:src="@drawable/outline_arrow_back_24"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="369dp"
+        android:layout_height="663dp"
         android:layout_gravity="center_vertical"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -52,27 +53,42 @@
                 android:id="@+id/etDocumento"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:background="@drawable/edittext_border"
-                android:textColor="#211515"
-                android:paddingLeft="7dp"
-                android:minHeight="55dp"
                 android:layout_marginBottom="8dp"
-                android:hint=" Ingrese aquí  "
+                android:layout_weight="4"
+                android:autofillHints="Número de documento"
+                android:background="@drawable/edittext_border"
+                android:hint="Número de documento"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:maxLength="10"
+                android:minHeight="55dp"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:textColor="#211515"
                 android:textSize="18sp" />
         </LinearLayout>
 
 
         <Button
-            android:id="@+id/btnBuscar"
+            android:id="@+id/btnAgregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/btn_color"
-            android:text="BUSCAR"
+            android:text="AGREGAR"
             android:textColor="#FFFFFF" />
+
+
+        <ListView
+            android:id="@+id/lvClientes"
+            android:layout_width="351dp"
+            android:layout_height="384dp"
+            android:background="#00AAA3"
+            android:padding="10dp"
+            android:textColor="#E4DDDD" />
+
 
         <!-- Grupo Datos del cliente  -->
         <LinearLayout
@@ -83,7 +99,39 @@
             android:visibility="gone"> <!-- Oculto al inicio -->
 
 
-            <!-- NOMBRE Y APELLIDO -->
+            <!-- APELLIDO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:hint="Apellido"
+                    android:minHeight="48dp"
+                    android:text="Apellido"
+                    android:textColor="#E4DDDD"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/etApellido"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:autofillHints="Apellido"
+                    android:background="@drawable/edittext_border"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:textColor="#211515"
+                    android:textColorHint="#A995D8"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- NOMBRE -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,17 +144,19 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:minHeight="48dp"
-                    android:text="Nombre y Apellido"
+                    android:text="Nombre"
                     android:textColor="#E4DDDD"
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/etNombreApellido"
+                    android:id="@+id/etNombre"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:autofillHints="Nombre"
                     android:background="@drawable/edittext_border"
-                    android:hint="Nombre y Apellido"
+
+                    android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="#211515"
                     android:textColorHint="#A995D8"
@@ -135,9 +185,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:autofillHints="birthDate"
                     android:background="@drawable/edittext_border"
                     android:clickable="true"
-                    android:focusable="false"
+                    android:focusable="true"
                     android:hint="Fecha de Nacimiento"
                     android:inputType="none"
                     android:minHeight="48dp"
@@ -178,66 +229,53 @@
             </LinearLayout>
 
 
-
-            <!-- Actividad para No socios  -->
+            <!-- ACTIVIDADES  -->
             <LinearLayout
                 android:id="@+id/actividadNoSocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"> <!-- Oculto al inicio -->
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
 
-
-                <!-- ACTIVIDAD -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:minHeight="48dp"
+                    android:text="Actividad"
+                    android:textColor="#E4DDDD"
+                    android:textSize="16sp" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:minHeight="48dp"
-                        android:text="Actividad"
-                        android:textColor="#E4DDDD"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/etActividad"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@drawable/edittext_border"
-                        android:hint="Actividad"
-                        android:minHeight="48dp"
-                        android:textColor="#211515"
-                        android:textColorHint="#A995D8"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btnBuscarActividad"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/etActividad"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="@color/btn_color"
-                    android:text="BUSCAR"
-                    android:textColor="#FFFFFF" />
-
+                    android:layout_weight="2"
+                    android:autofillHints="Actividad"
+                    android:background="@drawable/edittext_border"
+                    android:hint="Actividad"
+                    android:inputType="none"
+                    android:minHeight="48dp"
+                    android:textColor="#211515"
+                    android:textColorHint="#A995D8"
+                    android:textSize="16sp" />
             </LinearLayout>
 
 
+            <ListView
+                android:id="@+id/lvActividades"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00AAA3"
+                android:clickable="true"
+                android:focusable="true"
+                android:textColor="#E4DDDD"
+                android:visibility="visible" />
 
 
-
-
-            <!-- CUOTA NO EDITABLE -->
+            <!-- Cuota, no editable -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -260,11 +298,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:autofillHints="Cuota"
                     android:background="@drawable/edittext_border"
                     android:enabled="false"
-
                     android:focusable="false"
-                    android:hint="20.000"
                     android:inputType="text"
                     android:minHeight="48dp"
                     android:textColor="#211515"
@@ -294,8 +331,8 @@
                     android:id="@+id/cbAptoFisico"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="18dp"
                     android:textColor="#8D8686" />
             </LinearLayout>
 
@@ -321,8 +358,8 @@
                     android:id="@+id/cbEmitirCarnet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
                     android:textColor="#8D8686" />
             </LinearLayout>
 
@@ -356,6 +393,7 @@
                     android:textColorHint="#4CAF50" />
             </LinearLayout>
 
+
             <Button
                 android:id="@+id/btnRegistrar"
                 android:layout_width="wrap_content"
@@ -364,7 +402,7 @@
                 android:backgroundTint="@color/btn_color"
                 android:text="REGISTRAR"
                 android:textColor="#FFFFFF" />
-
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
