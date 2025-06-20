@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import android.widget.Toast
 
 
 class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 15) {
@@ -197,8 +196,19 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
             )
 
             val existe = cursor.count > 0
-            return existe
-        }
+        cursor.close()
+        db.close()
+        return existe
+    }
+
+    fun validarClienteExistePorDocumento(documento: String): Boolean {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT 1 FROM clientes WHERE nro_documento = ?", arrayOf(documento))
+        val existe = cursor.moveToFirst()
+        cursor.close()
+        db.close()
+        return existe
+    }
 
     /*fun insertarCobro(
             anio: Int,

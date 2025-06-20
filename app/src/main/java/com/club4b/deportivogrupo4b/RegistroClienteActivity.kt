@@ -31,7 +31,7 @@ class RegistroClienteActivity: AppCompatActivity() {
     private lateinit var dbHelper:UserDBHelper
 
     // Lista de documentos ya registrados (simulado)
-    private val clientesRegistrados = listOf("12345678", "87654321")
+    //private val clientesRegistrados = listOf("12345678", "87654321")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,12 +58,13 @@ class RegistroClienteActivity: AppCompatActivity() {
         val grupoDatosCliente = findViewById<LinearLayout>(R.id.grupoDatosCliente)
         grupoDatosCliente.visibility = View.GONE
 
+
+
         btnAgregar.setOnClickListener {
-            val docIngresado = etDocumento.text.toString()
+            val docIngresado = etDocumento.text.toString().trim()
 
-            if (clientesRegistrados.contains(docIngresado)) {
+            if (dbHelper.validarClienteExistePorDocumento(docIngresado)) {
                 Toast.makeText(this, "Cliente ya registrado", Toast.LENGTH_SHORT).show()
-
                 Handler(Looper.getMainLooper()).postDelayed({
                     finish() // volver al menú
                 }, 1500)
@@ -211,10 +212,10 @@ class RegistroClienteActivity: AppCompatActivity() {
             val fechaInscripcion =
                 SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(java.util.Date())
             val valorTipoCliente = spTipoCliente.selectedItem.toString()
-            val actividad = etActividad.text.toString().trim()
+            //val actividad = etActividad.text.toString().trim()
             //val cuota = txtCuota.text.toString().trim()
             //val valorCuota = cuota.toFloat()
-            val valorCuota = 10000f
+            //val valorCuota = 10000f
             val esMoroso = 0       // No es moroso
 
 
@@ -254,4 +255,6 @@ class RegistroClienteActivity: AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lista)
         lvActividades.adapter = adapter
     }
+
+
 }
