@@ -1,5 +1,6 @@
 package com.club4b.deportivogrupo4b
 
+import android.R
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -239,6 +240,39 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
             return resultado != -1L
 
         }
+
+    // obtiene el vencimiento de cuotas diarias
+
+    fun listadoVencimientos (buscarFecha:String): List<Vencimiento> {
+
+        val lista = mutableListOf<Vencimiento>()
+        val db = this.readableDatabase
+
+        val cursor = db.rawQuery(
+            """
+        SELECT c.nro_documento, c.nombre, c.apellido
+        FROM cobros co
+        JOIN clientes c ON co.cliente_id = c.id_cliente
+        WHERE co.fechaVencimiento = ?
+        """.trimIndent(),
+            arrayOf(buscarFecha)
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val nroDoc = cursor.getString(0)
+                val nombre = cursor.getString(1)
+                val apellido = cursor.getString(2)
+                lista.add(Vencimiento(nroDoc, nombre, apellido))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return lista
+    }
+
 
     }
 

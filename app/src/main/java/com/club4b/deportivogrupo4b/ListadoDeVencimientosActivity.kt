@@ -1,6 +1,5 @@
 package com.club4b.deportivogrupo4b
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -21,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.Calendar
 
 class ListadoDeVencimientosActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,7 +46,7 @@ class ListadoDeVencimientosActivity : AppCompatActivity() {
         }
 
 
-        //devuelve valores en la tabla de vencimientos- habra que modificarla cuando se conecte con BD.
+        //Devuelve valores en la tabla de vencimientos-
 
         val recycler = findViewById<RecyclerView>(R.id.recyclerVencimientos)
         val btnBuscarFecha = findViewById<Button>(R.id.btnBuscarFecha)
@@ -57,18 +56,24 @@ class ListadoDeVencimientosActivity : AppCompatActivity() {
         recycler.setHasFixedSize(true)
 
         btnBuscarFecha.setOnClickListener {
-            // Lista de prueba (demo)
-            val listaDemo = listOf(
-                Vencimiento("35703124", "Gilda", "Morgante"),
-                Vencimiento("29554441", "Carlos", "López"),
-                Vencimiento("31122333", "Lucía", "Pérez")
-            )
 
-            // Asigna el adapter al RecyclerView con los datos demo
-            recycler.adapter = VencimientoAdapter(listaDemo)
+            val buscarFecha = editFecha.text.toString()
 
-            // Muestra el RecyclerView (por si estaba oculto)
-            recycler.visibility = View.VISIBLE
+            if (buscarFecha.isBlank()) {
+                Toast.makeText(this, "Ingresá una fecha para buscar", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val dbHelper = UserDBHelper(this)
+            val listaVencimientos = dbHelper.listadoVencimientos(buscarFecha)
+
+            if (listaVencimientos.isEmpty()) {
+                Toast.makeText(this, "No hay vencimientos para la fecha ingresada", Toast.LENGTH_SHORT).show()
+                recycler.visibility = View.GONE
+            } else {
+                recycler.adapter = VencimientoAdapter(listaVencimientos)
+                recycler.visibility = View.VISIBLE
+            }
         }
     }
 }
