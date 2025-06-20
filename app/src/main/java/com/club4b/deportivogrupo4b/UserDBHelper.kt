@@ -210,7 +210,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
         return existe
     }
 
-    /*fun insertarCobro(
+      fun insertarCobro(
             anio: Int,
             mes: Int,
             cliente: Int,
@@ -238,7 +238,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
 
             return resultado != -1L
 
-        }*/
+        }
 
     }
 

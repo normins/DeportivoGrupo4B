@@ -187,7 +187,7 @@
                         android:textSize="16sp" />
 
                     <Spinner
-                        android:id="@+id/Spinner_Cuota"
+                        android:id="@+id/spFormaPago"
                         android:layout_width="0dp"
                         android:layout_weight="2"
                         android:layout_height="wrap_content"
@@ -195,6 +195,7 @@
                         android:textColorHint="#4CAF50"
                         android:minHeight="48dp"
                         android:background="@drawable/edittext_border"/>
+
                 </LinearLayout>
 
                 <LinearLayout
