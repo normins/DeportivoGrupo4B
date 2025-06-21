@@ -1,6 +1,5 @@
 package com.club4b.deportivogrupo4b
 
-import android.R
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -8,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
 
-class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 15) {
+class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportivoDB", null, 27) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
@@ -33,7 +32,8 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
                 apto_fisico INTEGER,
                 tipo_cliente TEXT,
                 estado_carnet INTEGER,
-                esMoroso INTEGER
+                esMoroso INTEGER,
+                actividad INTEGER
             )
         """.trimIndent()
         )
@@ -105,23 +105,28 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
         db.execSQL(
             "INSERT INTO clientes( id_cliente, nro_documento, fecha_nacimiento," +
                     " nombre, apellido,fecha_inscripcion, apto_fisico, tipo_cliente," +
-                    " estado_carnet, esMoroso)"+
-                    "VALUES (1, '35703124', '1990-01-01', 'Gilda', 'Morgante', " +
-                    "'2023-01-01', 1, 'Socio', 1, 0)")
+                    " estado_carnet, esMoroso, actividad)"+
+                    "VALUES (1, '35703124', '01/01/1990', 'Gilda', 'Morgante', " +
+                    "'01/01/2023', 1, 'Socio', 1, 0, 1000)")
+
+        db.execSQL(
+            "INSERT INTO clientes( id_cliente, nro_documento, fecha_nacimiento," +
+                    " nombre, apellido,fecha_inscripcion, apto_fisico, tipo_cliente," +
+                    " estado_carnet, esMoroso, actividad)"+
+                    "VALUES (2, '25252525', '12/06/1994', 'Harry', 'Potter', " +
+                    "'01/01/2024', 1, 'Socio', 1, 0, 1000)")
 
         //para simular la busqueda en activity gestion de cobro y ver fecha de vto
 
         db.execSQL(
             "INSERT INTO cobros(anio_id, mes_id, cliente_id,importe, fechaVencimiento, formapago, pagado)"
                     + "VALUES (2025,06, 1,2000, '12/06/2025',0,2000)")
-
-
     }
 
     fun insertarCliente (nombre: String, apellido:String, nroDocumento:String,
                          fechaNacimiento:String, fechaInscripcion:String,
                          aptoFisico:Int, tipoCliente:String,
-                         estadoCarnet:Int, esMoroso:Int): Boolean{
+                         estadoCarnet:Int, esMoroso:Int, actividad:Int): Long {
 
 
         val db = writableDatabase
@@ -135,13 +140,14 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
             put("tipo_cliente", tipoCliente)
             put("estado_carnet", estadoCarnet)
             put("esMoroso", esMoroso)
+            put("actividad", actividad)
         }
 
         Log.d("DB", "Insertando cliente: $nombre $apellido $nroDocumento")
         val resultado = db.insert("clientes", null, valores)
         Log.d("DB", "Resultado inserción: $resultado")
 
-        return resultado != -1L
+        return resultado
     }
 
 
@@ -165,15 +171,15 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
     fun obtenerActividades(): List<String> {
         val actividades = mutableListOf<String>()
         val db = readableDatabase
-        val cursor = db.rawQuery("SELECT nombre, horario, precio FROM actividades", null)
+        val cursor = db.rawQuery("SELECT id, nombre, horario, precio FROM actividades", null)
         if (cursor.moveToFirst()){
             do {
-                val nombre = cursor.getString(0)
-                val horario = cursor.getString(1)
-                val precio = cursor.getString(2)
-                actividades.add("$nombre - $horario - $precio")
+                val id = cursor.getString(0)
+                val nombre = cursor.getString(1)
+                val horario = cursor.getString(2)
+                val precio = cursor.getString(3)
+                actividades.add("$id - $nombre - $horario - $precio")
             } while (cursor.moveToNext())
-        // Usar actividades para llenar el ListView
         }
         cursor.close()
         return actividades
@@ -190,13 +196,13 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
         }
 
     fun login(nombre: String, contrasena: String): Boolean {
-            val db = readableDatabase
-            val cursor = db.rawQuery(
-                "SELECT * FROM usuarios WHERE nombre=? and contrasena=?",
-                arrayOf(nombre, contrasena)
-            )
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM usuarios WHERE nombre=? and contrasena=?",
+            arrayOf(nombre, contrasena)
+        )
 
-            val existe = cursor.count > 0
+        val existe = cursor.count > 0
         cursor.close()
         db.close()
         return existe

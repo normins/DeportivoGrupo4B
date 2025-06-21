@@ -250,7 +250,7 @@
 
                 <EditText
                         android:id="@+id/etActividad"
-                        android:layout_width="20dp"
+                        android:layout_width="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:autofillHints="Elige una actividad"
@@ -261,14 +261,26 @@
                         android:textColor="#211515"
                         android:textColorHint="#A995D8"
                         android:textSize="16sp" />
-            </LinearLayout>
 
+                <TextView
+                        android:id="@+id/txtActividad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:autofillHints="Cuota"
+                        android:background="#E0E0E0"
+                        android:enabled="false"
+                        android:focusable="false"
+                        android:minHeight="48dp"
+                        android:textColor="#211515"
+                        android:textSize="16sp" />
+            </LinearLayout>
 
             <ListView
                     android:id="@+id/lvActividades"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:background="#00AAA3"
+                    android:background="#9A9F9F"
                     android:clickable="true"
                     android:focusable="true"
                     android:textColor="#E4DDDD"
@@ -288,10 +300,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:minHeight="48dp"
+                        android:minHeight="30dp"
                         android:text="Cuota a abonar"
                         android:textColor="#E4DDDD"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                 <TextView
                         android:id="@+id/txtCuota"
@@ -302,10 +314,8 @@
                         android:background="@drawable/edittext_border"
                         android:enabled="false"
                         android:focusable="false"
-                        android:inputType="text"
                         android:minHeight="48dp"
                         android:textColor="#211515"
-                        android:textColorHint="#673AB7"
                         android:textSize="16sp" />
             </LinearLayout>
 

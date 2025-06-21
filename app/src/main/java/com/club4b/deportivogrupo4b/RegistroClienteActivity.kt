@@ -6,7 +6,6 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -21,7 +20,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
-
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -30,16 +28,11 @@ class RegistroClienteActivity: AppCompatActivity() {
 
     private lateinit var dbHelper:UserDBHelper
 
-    // Lista de documentos ya registrados (simulado)
-    //private val clientesRegistrados = listOf("12345678", "87654321")
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro_cliente)
 
         dbHelper = UserDBHelper(this)
-
 
         //Retornar con la imagen de flecha
         val back1 = findViewById<ImageView>(R.id.back1)
@@ -49,16 +42,12 @@ class RegistroClienteActivity: AppCompatActivity() {
 
         mostrarClientes()
 
-
-
         val etDocumento = findViewById<EditText>(R.id.etDocumento)
         val btnAgregar = findViewById<Button>(R.id.btnAgregar)
         val lvClientes = findViewById<ListView>(R.id.lvClientes)
 
         val grupoDatosCliente = findViewById<LinearLayout>(R.id.grupoDatosCliente)
         grupoDatosCliente.visibility = View.GONE
-
-
 
         btnAgregar.setOnClickListener {
             val docIngresado = etDocumento.text.toString().trim()
@@ -82,7 +71,7 @@ class RegistroClienteActivity: AppCompatActivity() {
                     etDocumento.isEnabled = false
                     etDocumento.backgroundTintList = ContextCompat.getColorStateList(
                         this,
-                        android.R.color.background_light
+                        android.R.color.holo_green_dark
                     ) // o null
 
                 }
@@ -91,18 +80,10 @@ class RegistroClienteActivity: AppCompatActivity() {
 
         val etNombre = findViewById<EditText>(R.id.etNombre)
         val etApellido = findViewById<EditText>(R.id.etApellido)
-        //  val etFechaNacimiento = findViewById<EditText>(R.id.etFechaNacimiento)
-
-
-
-
-
         val cbAptoFisico = findViewById<CheckBox>(R.id.cbAptoFisico)
         val valorAptoFisico = if (cbAptoFisico.isChecked) 1 else 0
         val cbEmitirCarnet = findViewById<CheckBox>(R.id.cbEmitirCarnet)
         val valorEmitirCarnet = if (cbEmitirCarnet.isChecked) 1 else 0
-        //val valorFormaPago = findViewById<Spinner>(R.id.spFormaPago).selectedItemPosition
-
 
         // Forma de pago
         val formaPagoSpinner = findViewById<Spinner>(R.id.spFormaPago)
@@ -138,11 +119,10 @@ class RegistroClienteActivity: AppCompatActivity() {
 
         adapterCli.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spTipoCliente.adapter = adapterCli
-
-        spTipoCliente.setSelection(0) // si "Socio" está en la posición 0
-
+        spTipoCliente.setSelection(1) //  "No Socio" está en la posición 1
 
         val etActividad = findViewById<EditText>(R.id.etActividad)
+        val txtActividad = findViewById<TextView>(R.id.txtActividad)
         val txtCuota = findViewById<TextView>(R.id.txtCuota)
         txtCuota.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray) // o null
         val lvActividades = findViewById<ListView>(R.id.lvActividades)
@@ -151,7 +131,6 @@ class RegistroClienteActivity: AppCompatActivity() {
         etActividad.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 val tipoSeleccionado = spTipoCliente.selectedItem.toString().trim()
-
                 val actividades = dbHelper.obtenerActividades()
                 mostrarActividades() // carga en lvActividades
 
@@ -160,12 +139,13 @@ class RegistroClienteActivity: AppCompatActivity() {
                         //Socio: no mostrar lista, cargar la primera
                         val partes = actividades[0].split(" - ")
                         etActividad.setText(partes[0])
-                        txtCuota.setText(partes.getOrNull(2) ?: "")
+                        txtActividad.setText(partes[1])
+                        txtCuota.setText(partes.getOrNull(3) ?: "")
                         lvActividades.visibility = View.GONE
                     }
 
                     "No Socio" -> {
-                        // No socio: mostrar la lista, sin pewritir seleccionar la primera
+                        // No socio: mostrar la lista, sin permitir seleccionar la primera
                         lvActividades.visibility = View.VISIBLE
 
                         lvActividades.setOnItemClickListener { _, _, position, _ ->
@@ -178,39 +158,17 @@ class RegistroClienteActivity: AppCompatActivity() {
                             } else {
                                 val partes = actividades[position].split(" - ")
                                 etActividad.setText(partes[0])
-                                txtCuota.setText(partes.getOrNull(2) ?: "")
+                                txtActividad.setText(partes[1])
+                                txtCuota.setText(partes.getOrNull(3) ?: "")
                                 lvActividades.visibility = View.GONE
                             }
                         }
                     }
                 }
             }
-
         }
 
-
-
-        //
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
-
-
-
-        etApellido.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                etApellido.backgroundTintList = ContextCompat.getColorStateList(this, R.color.resaltado_ingresar_datos_color)
-            } else {
-                etApellido.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray) // o null
-            }
-        }
-        etNombre.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                etNombre.backgroundTintList = ContextCompat.getColorStateList(this, R.color.resaltado_ingresar_datos_color)
-            } else {
-                etNombre.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray) // o null
-            }
-        }
-
-
 
 
 
@@ -220,16 +178,12 @@ class RegistroClienteActivity: AppCompatActivity() {
             val documento = etDocumento.text.toString().trim()
             val fechaNacimiento = etFecha.text.toString().trim()
             val fechaInscripcion =
-                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(java.util.Date())
+                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date())
             val valorTipoCliente = spTipoCliente.selectedItem.toString()
-            //val actividad = etActividad.text.toString().trim()
-            //val cuota = txtCuota.text.toString().trim()
-            //val valorCuota = cuota.toFloat()
-            //val valorCuota = 10000f
+            val actividadId = etActividad.text.toString().toInt()
+            val cuota = txtCuota.text.toString().toDouble()
             val esMoroso = 0       // No es moroso
-
-
-            //val formaPago = valorFormaPago
+            val formaPago = formaPagoSpinner.selectedItemPosition + 1
 
             if (nombre.isEmpty() || apellido.isEmpty()) {
                 Toast.makeText(this, "Por favor, completar todos los campos obligatorios",
@@ -237,14 +191,15 @@ class RegistroClienteActivity: AppCompatActivity() {
 
             } else {
 
+                val clienteId = (dbHelper.insertarCliente(
+                    nombre, apellido, documento, fechaNacimiento, fechaInscripcion,
+                    valorAptoFisico, valorTipoCliente, valorEmitirCarnet, esMoroso, actividadId))
 
-                if (dbHelper.insertarCliente(
-                        nombre, apellido, documento, fechaNacimiento, fechaInscripcion,
-                        valorAptoFisico, valorTipoCliente, valorEmitirCarnet, esMoroso
-                    )
-                ) {
-                    Toast.makeText(this, "Cliente registrado correctamente", Toast.LENGTH_SHORT)
+                if (clienteId != -1L) {
+                   Toast.makeText(this, "Cliente registrado correctamente", Toast.LENGTH_SHORT)
                         .show()
+                   val clienteIdInt = clienteId.toInt()
+                   registrarPrimerCobro(clienteIdInt, cuota, formaPago)
                 } else {
                     Toast.makeText(this, "Error al agregar cliente", Toast.LENGTH_SHORT).show()
                 }
@@ -253,7 +208,7 @@ class RegistroClienteActivity: AppCompatActivity() {
                 etApellido.text.clear()
                 etFecha.text.clear()
                 etActividad.text.clear()
-                //txtCuota.text.clear()
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     finish() // volver al menú
                 }, 1500)
@@ -273,6 +228,45 @@ class RegistroClienteActivity: AppCompatActivity() {
         val lista = dbHelper.obtenerActividades()
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, lista)
         lvActividades.adapter = adapter
+    }
+
+    private fun registrarPrimerCobro(clienteId: Int, cuota: Double, formaPago: Int){
+        val calendario = Calendar.getInstance()
+        val anioCobro = calendario.get(Calendar.YEAR)
+        val mesCobro = calendario.get(Calendar.MONTH) + 1  // enero = 0, por eso se suma 1
+
+        // calcular vencimiento
+        calendario.add(Calendar.MONTH, 1)
+        val formato = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val fechaVencimiento = formato.format(calendario.time)
+
+        val pagado = 1
+
+        val dbHelper = UserDBHelper(this)
+
+        //usa la funcion declarada en la DB Helper para escribir la BD
+        val exito = dbHelper.insertarCobro(
+            anioCobro,
+            mesCobro,
+            clienteId,
+            cuota,
+            fechaVencimiento,
+            formaPago,
+            pagado
+        )
+
+        if (exito) {
+            Toast.makeText(this, "Cobro registrado correctamente", Toast.LENGTH_SHORT)
+                .show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                findViewById<LinearLayout>(R.id.grupoDatosClienteCobro).visibility =
+                    View.GONE
+                findViewById<Button>(R.id.btnBuscarCobro).visibility = View.VISIBLE
+            }, 1500)
+
+        } else {
+            Toast.makeText(this, "Error al registrar el cobro", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
