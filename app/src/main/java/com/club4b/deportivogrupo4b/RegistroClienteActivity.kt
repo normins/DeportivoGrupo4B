@@ -63,19 +63,29 @@ class RegistroClienteActivity: AppCompatActivity() {
         btnAgregar.setOnClickListener {
             val docIngresado = etDocumento.text.toString().trim()
 
-            if (dbHelper.validarClienteExistePorDocumento(docIngresado)) {
-                Toast.makeText(this, "Cliente ya registrado", Toast.LENGTH_SHORT).show()
-                Handler(Looper.getMainLooper()).postDelayed({
-                    finish() // volver al menú
-                }, 1500)
+            if (docIngresado.isEmpty()) {
+                Toast.makeText(this, "Por favor, completar el Número de documento",
+                                Toast.LENGTH_SHORT).show()
+
             } else {
-                grupoDatosCliente.visibility = View.VISIBLE
-                btnAgregar.visibility = View.GONE // Oculta el botón Buscar
-                lvClientes.visibility = View.GONE // Oculta lista de clientes
 
-                etDocumento.isEnabled = false
-                etDocumento.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.background_light) // o null
+                if (dbHelper.validarClienteExistePorDocumento(docIngresado)) {
+                    Toast.makeText(this, "Cliente ya registrado", Toast.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        finish() // volver al menú
+                    }, 1500)
+                } else {
+                    grupoDatosCliente.visibility = View.VISIBLE
+                    btnAgregar.visibility = View.GONE // Oculta el botón Buscar
+                    lvClientes.visibility = View.GONE // Oculta lista de clientes
 
+                    etDocumento.isEnabled = false
+                    etDocumento.backgroundTintList = ContextCompat.getColorStateList(
+                        this,
+                        android.R.color.background_light
+                    ) // o null
+
+                }
             }
         }
 
@@ -150,7 +160,7 @@ class RegistroClienteActivity: AppCompatActivity() {
                         //Socio: no mostrar lista, cargar la primera
                         val partes = actividades[0].split(" - ")
                         etActividad.setText(partes[0])
-                        txtCuota.setText(partes.getOrNull(1) ?: "")
+                        txtCuota.setText(partes.getOrNull(2) ?: "")
                         lvActividades.visibility = View.GONE
                     }
 
@@ -181,7 +191,7 @@ class RegistroClienteActivity: AppCompatActivity() {
 
 
         //
-        val boton = findViewById<Button>(R.id.btnRegistrar)
+        val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
 
 
 
@@ -204,7 +214,7 @@ class RegistroClienteActivity: AppCompatActivity() {
 
 
 
-        boton.setOnClickListener {
+        btnRegistrar.setOnClickListener {
             val nombre = etNombre.text.toString().trim()
             val apellido = etApellido.text.toString().trim()
             val documento = etDocumento.text.toString().trim()
@@ -221,24 +231,33 @@ class RegistroClienteActivity: AppCompatActivity() {
 
             //val formaPago = valorFormaPago
 
-            if (dbHelper.insertarCliente(
-                    nombre, apellido, documento, fechaNacimiento, fechaInscripcion,
-                    valorAptoFisico, valorTipoCliente, valorEmitirCarnet, esMoroso
-                )) {
-                Toast.makeText(this, "Cliente registrado correctamente", Toast.LENGTH_SHORT).show()
-            } else{
-            Toast.makeText(this, "Error al agregar cliente", Toast.LENGTH_SHORT).show()
-            }
-            etDocumento.text.clear()
-            etNombre.text.clear()
-            etApellido.text.clear()
-            etFecha.text.clear()
-            etActividad.text.clear()
-            //txtCuota.text.clear()
-            Handler(Looper.getMainLooper()).postDelayed({
-                finish() // volver al menú
-            }, 1500)
+            if (nombre.isEmpty() || apellido.isEmpty()) {
+                Toast.makeText(this, "Por favor, completar todos los campos obligatorios",
+                    Toast.LENGTH_SHORT).show()
 
+            } else {
+
+
+                if (dbHelper.insertarCliente(
+                        nombre, apellido, documento, fechaNacimiento, fechaInscripcion,
+                        valorAptoFisico, valorTipoCliente, valorEmitirCarnet, esMoroso
+                    )
+                ) {
+                    Toast.makeText(this, "Cliente registrado correctamente", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(this, "Error al agregar cliente", Toast.LENGTH_SHORT).show()
+                }
+                etDocumento.text.clear()
+                etNombre.text.clear()
+                etApellido.text.clear()
+                etFecha.text.clear()
+                etActividad.text.clear()
+                //txtCuota.text.clear()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    finish() // volver al menú
+                }, 1500)
+            }
         }
     }
 
