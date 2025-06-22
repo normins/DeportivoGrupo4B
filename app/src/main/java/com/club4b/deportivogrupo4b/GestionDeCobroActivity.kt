@@ -23,8 +23,10 @@ class GestionDeCobroActivity : AppCompatActivity() {
     private var clienteId: Int = -1
     private var anioCliente: Int = 0
     private var mesCliente: Int = 0
-    private var importePendiente: Double = 0.0
     private var fechaUltimaVto: String = ""
+    private var importe: Double = 0.0
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,7 @@ class GestionDeCobroActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         //Abrir gestion de cobro con el evento click en boton buscar.
 
         val btnBuscarCobro = findViewById<Button>(R.id.btnBuscarCobro)
@@ -56,10 +59,12 @@ class GestionDeCobroActivity : AppCompatActivity() {
         val etnombreApellido = findViewById<EditText>(R.id.etnombreApellido)
         val etipoCliente = findViewById<EditText>(R.id.etipodeCliente)
         val etfechaVencimiento = findViewById<EditText>(R.id.etfechaVencimiento)
+        val etCuota = findViewById<EditText>(R.id.etCuota)
 
 
+        // Mostrar el grupo de datos validando el doc
         btnBuscarCobro.setOnClickListener {
-            // Mostrar el grupo de datos validando el doc
+
             val dniBuscado = etDocumento.text.toString()
 
             //valida si el campo etDocumento esta en blanco
@@ -96,7 +101,8 @@ class GestionDeCobroActivity : AppCompatActivity() {
                 fechaUltimaVto = cursor.getString(5)
                 anioCliente = cursor.getInt(6)
                 mesCliente = cursor.getInt(7)
-                importePendiente = cursor.getDouble(8)
+                importe = cursor.getDouble(8)
+
 
 
                 //se muestran los datos
@@ -104,6 +110,7 @@ class GestionDeCobroActivity : AppCompatActivity() {
                 etnombreApellido.setText("$nombre $apellido") // Une nombre y apellido
                 etipoCliente.setText(tipo_cliente)
                 etfechaVencimiento.setText(fechaUltimaVto)
+                etCuota.setText(importe.toString())
 
                 grupoDatosClienteCobro.visibility = View.VISIBLE
                 btnBuscarCobro.visibility = View.GONE
@@ -117,45 +124,49 @@ class GestionDeCobroActivity : AppCompatActivity() {
 
         }
 
+         val btnConfirmarCobro=findViewById<Button>(R.id.btnConfirmarCobro)
+         btnConfirmarCobro.setOnClickListener {
 
-        val btnConfirmarCobro = findViewById<Button>(R.id.btnConfirmarCobro)
-
-        btnConfirmarCobro.setOnClickListener {
-            val spFormaPago = findViewById<Spinner>(R.id.spFormaPagoCobro)
-
+            val spFormaPago = findViewById<Spinner>(R.id.spFormaPago)
             val formato = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+            // Parseo la fecha original
             val fecha = formato.parse(fechaUltimaVto)
+
             val calendar = Calendar.getInstance()
             calendar.time = fecha!!
+
+            // Sumo 31 días
             calendar.add(Calendar.DAY_OF_YEAR, 31)
 
-            val nuevaFechaVencimiento = formato.format(calendar.time)
+            // Actualizo año y mes para la clave primaria
+            anioCliente = calendar.get(Calendar.YEAR)
+            mesCliente = calendar.get(Calendar.MONTH) + 1  //  Enero es 0 en Calendar, sumamos 1
+
+            // Nueva fecha de vencimiento formateada para guardar en BD
+            val fechaVencimiento = formato.format(calendar.time)
 
             val formaPago = spFormaPago.selectedItemPosition + 1
             val pagado = 1
 
             val dbHelper = UserDBHelper(this)
 
-            //usa la funcion declarada en la DB Helper para escribir la BD
             val exito = dbHelper.insertarCobro(
                 anioCliente,
                 mesCliente,
                 clienteId,
-                importePendiente,
-                nuevaFechaVencimiento,
+                importe,
+                fechaVencimiento,
                 formaPago,
                 pagado
             )
 
             if (exito) {
-                Toast.makeText(this, "Cobro registrado correctamente", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(this, "Cobro registrado correctamente", Toast.LENGTH_SHORT).show()
                 Handler(Looper.getMainLooper()).postDelayed({
-                    findViewById<LinearLayout>(R.id.grupoDatosClienteCobro).visibility =
-                        View.GONE
+                    findViewById<LinearLayout>(R.id.grupoDatosClienteCobro).visibility = View.GONE
                     findViewById<Button>(R.id.btnBuscarCobro).visibility = View.VISIBLE
                 }, 1500)
-
             } else {
                 Toast.makeText(this, "Error al registrar el cobro", Toast.LENGTH_SHORT).show()
             }
@@ -174,6 +185,9 @@ class GestionDeCobroActivity : AppCompatActivity() {
             }, 1500)
 
         }
+
+
+
     }
 }
 
