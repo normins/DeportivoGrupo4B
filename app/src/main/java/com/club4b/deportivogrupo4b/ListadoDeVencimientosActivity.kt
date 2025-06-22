@@ -2,10 +2,12 @@ package com.club4b.deportivogrupo4b
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.print.PrintManager
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -25,6 +27,13 @@ class ListadoDeVencimientosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_listado_de_vencimientos)
+
+        data class Vencimiento(
+            val nroDocumento: String,
+            val nombre: String,
+            val apellido: String
+        )
+
 
 
         val editFecha = findViewById<EditText>(R.id.editFecha)
@@ -50,6 +59,7 @@ class ListadoDeVencimientosActivity : AppCompatActivity() {
 
         val recycler = findViewById<RecyclerView>(R.id.recyclerVencimientos)
         val btnBuscarFecha = findViewById<Button>(R.id.btnBuscarFecha)
+        val btnImprimir=findViewById<Button>(R.id.btnDescargar)
 
         // Configura el RecyclerView una sola vez
         recycler.layoutManager = LinearLayoutManager(this)
@@ -73,7 +83,23 @@ class ListadoDeVencimientosActivity : AppCompatActivity() {
             } else {
                 recycler.adapter = VencimientoAdapter(listaVencimientos)
                 recycler.visibility = View.VISIBLE
+                btnImprimir.visibility=View.VISIBLE
+
             }
         }
+
+        btnImprimir.setOnClickListener {
+
+            AlertDialog.Builder(this)
+                .setTitle("Descarga")
+                .setMessage("Se descargara el archivo")
+                .setPositiveButton("OK", null)
+                .show()
+        }
+
+
+        }
     }
-}
+
+
+

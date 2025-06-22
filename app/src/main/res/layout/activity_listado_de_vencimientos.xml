@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:hint="@string/seleccionar_fecha"
+            android:background="@drawable/edittext_border"
             android:focusable="false" />
 
     </LinearLayout>
@@ -84,6 +85,19 @@
           android:layout_height="wrap_content"
           android:layout_marginTop="16dp"
           android:visibility="gone" />
+
+
+    <Button
+            android:id="@+id/btnDescargar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="220dp"
+            android:text="DESCARGAR"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/btn_color"
+            android:visibility="gone" />
+
 
         </LinearLayout>
 
