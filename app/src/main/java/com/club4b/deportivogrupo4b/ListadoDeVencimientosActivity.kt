@@ -92,7 +92,7 @@ class ListadoDeVencimientosActivity : AppCompatActivity() {
 
             AlertDialog.Builder(this)
                 .setTitle("Descarga")
-                .setMessage("Se descargara el archivo")
+                .setMessage("Se descargará el archivo")
                 .setPositiveButton("OK", null)
                 .show()
         }
