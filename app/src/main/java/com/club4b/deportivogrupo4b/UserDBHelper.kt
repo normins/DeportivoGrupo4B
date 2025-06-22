@@ -121,8 +121,8 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
         //para simular la busqueda en activity vtos
 
         db.execSQL(
-            "INSERT INTO cobros (mes_id, cliente_id,importe, fechaVencimiento, formaPago,pagado)" +
-                    "VALUES(06,2,2000,21/06/2025,1,1)"
+            "INSERT INTO cobros (mes_id, cliente_id, importe, fechaVencimiento, formaPago,pagado)" +
+                    "VALUES(06,2,2000, '12/06/2025',1,1)"
         )
 
 
