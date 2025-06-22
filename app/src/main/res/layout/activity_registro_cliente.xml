@@ -36,6 +36,8 @@
                 android:textStyle="bold" />
 
 
+        <!-- Grupo Datos del cliente  -->
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,12 +55,12 @@
             <EditText
                     android:id="@+id/etDocumento"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="4"
                     android:autofillHints="Número de documento"
                     android:background="@drawable/edittext_border"
-                    android:hint="Número de documento"
+                    android:hint="Ingrese DNI"
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
                     android:maxLength="10"
@@ -66,11 +68,8 @@
                     android:paddingStart="7dp"
                     android:paddingEnd="7dp"
                     android:textColor="#211515"
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
         </LinearLayout>
-
-
-        <!-- Grupo Datos del cliente  -->
 
         <Button
                 android:id="@+id/btnAgregar"
@@ -86,7 +85,7 @@
         <ListView
                 android:id="@+id/lvClientes"
                 android:layout_width="397dp"
-                android:layout_height="518dp"
+                android:layout_height="555dp"
                 android:background="#00AAA3"
                 android:padding="10dp"
                 android:textColor="#E4DDDD" />
@@ -128,7 +127,7 @@
                         android:minHeight="48dp"
                         android:textColor="#211515"
                         android:textColorHint="#A995D8"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
             </LinearLayout>
 
             <!-- NOMBRE -->
@@ -155,12 +154,11 @@
                         android:layout_weight="2"
                         android:autofillHints="Nombre"
                         android:background="@drawable/edittext_border"
-
                         android:inputType="textPersonName"
                         android:minHeight="48dp"
                         android:textColor="#211515"
                         android:textColorHint="#A995D8"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
             </LinearLayout>
 
             <!-- FECHA DE NACIMIENTO  -->
@@ -188,13 +186,13 @@
                         android:autofillHints="birthDate"
                         android:background="@drawable/edittext_border"
                         android:clickable="true"
-                        android:focusable="true"
-                        android:hint="Fecha de Nacimiento"
+                        android:focusable="false"
+                        android:hint="Seleccionar fecha"
                         android:inputType="none"
                         android:minHeight="48dp"
                         android:textColor="#211515"
                         android:textColorHint="#A995D8"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
             </LinearLayout>
 
 
@@ -244,7 +242,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:minHeight="48dp"
-                        android:text="Actividad"
+                        android:text="Actividad (*)"
                         android:textColor="#E4DDDD"
                         android:textSize="16sp" />
 
@@ -260,7 +258,7 @@
                         android:minHeight="48dp"
                         android:textColor="#211515"
                         android:textColorHint="#A995D8"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                 <TextView
                         android:id="@+id/txtActividad"
@@ -314,9 +312,10 @@
                         android:background="@drawable/edittext_border"
                         android:enabled="false"
                         android:focusable="false"
-                        android:minHeight="48dp"
+                        android:minHeight="30dp"
+                        android:paddingTop="5dp"
                         android:textColor="#211515"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
             </LinearLayout>
 
             <!-- Apto físico -->
@@ -388,7 +387,7 @@
                         android:minHeight="48dp"
                         android:text="Forma de Pago"
                         android:textColor="#E4DDDD"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                 <Spinner
                         android:id="@+id/spFormaPago"
@@ -403,16 +402,31 @@
                         android:textColorHint="#4CAF50" />
             </LinearLayout>
 
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
-            <Button
-                    android:id="@+id/btnRegistrar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/btn_color"
-                    android:text="REGISTRAR"
-                    android:orientation="horizontal"
-                    android:gravity="end"
-                    android:textColor="#FFFFFF" />
+                <Button
+                        android:id="@+id/btnRegistrar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:text="CONFIRMAR"
+                        android:textColor="#FFFF"
+                        android:backgroundTint="@color/btn_color"/>
+
+                <Button
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:text="CANCELAR"
+                        android:textColor="#FFFF"
+                        android:backgroundTint="@color/btn_color" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

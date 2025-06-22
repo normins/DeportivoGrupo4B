@@ -55,9 +55,7 @@ class RegistroClienteActivity: AppCompatActivity() {
             if (docIngresado.isEmpty()) {
                 Toast.makeText(this, "Por favor, completar el Número de documento",
                                 Toast.LENGTH_SHORT).show()
-
             } else {
-
                 if (dbHelper.validarClienteExistePorDocumento(docIngresado)) {
                     Toast.makeText(this, "Cliente ya registrado", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -85,6 +83,10 @@ class RegistroClienteActivity: AppCompatActivity() {
         val cbEmitirCarnet = findViewById<CheckBox>(R.id.cbEmitirCarnet)
         val valorEmitirCarnet = if (cbEmitirCarnet.isChecked) 1 else 0
 
+        resaltarAlFoco(etNombre)
+        resaltarAlFoco(etApellido)
+
+
         // Forma de pago
         val formaPagoSpinner = findViewById<Spinner>(R.id.spFormaPago)
         val formaPago = arrayOf("Efectivo", "3 Cuotas", "6 Cuotas")
@@ -94,6 +96,8 @@ class RegistroClienteActivity: AppCompatActivity() {
 
         // Fecha de nacimiento
         val etFecha = findViewById<EditText>(R.id.etFechaNacimiento)
+
+
         etFecha.setOnClickListener {
             val calendario = Calendar.getInstance()
             val anio = 2000 //calendario.get(Calendar.YEAR)
@@ -125,7 +129,10 @@ class RegistroClienteActivity: AppCompatActivity() {
         val txtActividad = findViewById<TextView>(R.id.txtActividad)
         val txtCuota = findViewById<TextView>(R.id.txtCuota)
         txtCuota.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray) // o null
+        txtActividad.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray) // o null
+
         val lvActividades = findViewById<ListView>(R.id.lvActividades)
+
 
         // Mostrar lista al hacer foco
         etActividad.setOnFocusChangeListener { _, hasFocus ->
@@ -168,9 +175,20 @@ class RegistroClienteActivity: AppCompatActivity() {
             }
         }
 
+        val btnCancelar = findViewById<Button>(R.id.btnCancelar)
+
+        btnCancelar.setOnClickListener {
+            Toast.makeText(this, "El cliente no ha sido registrado", Toast.LENGTH_SHORT).show()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, MenuPrincipalActivity::class.java)
+                startActivity(intent)
+            }, 1500)
+
+        }
+
+
         val btnRegistrar = findViewById<Button>(R.id.btnRegistrar)
-
-
 
         btnRegistrar.setOnClickListener {
             val nombre = etNombre.text.toString().trim()
@@ -180,12 +198,12 @@ class RegistroClienteActivity: AppCompatActivity() {
             val fechaInscripcion =
                 SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date())
             val valorTipoCliente = spTipoCliente.selectedItem.toString()
-            val actividadId = etActividad.text.toString().toInt()
-            val cuota = txtCuota.text.toString().toDouble()
+            val actividadId = etActividad.text.toString().toIntOrNull() ?: 0
+            val cuota = txtCuota.text.toString().toDoubleOrNull() ?: 0.0
             val esMoroso = 0       // No es moroso
             val formaPago = formaPagoSpinner.selectedItemPosition + 1
 
-            if (nombre.isEmpty() || apellido.isEmpty()) {
+            if (nombre.isEmpty() || apellido.isEmpty() || actividadId == 0) {
                 Toast.makeText(this, "Por favor, completar todos los campos obligatorios",
                     Toast.LENGTH_SHORT).show()
 
@@ -203,6 +221,14 @@ class RegistroClienteActivity: AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Error al agregar cliente", Toast.LENGTH_SHORT).show()
                 }
+
+
+
+
+
+
+
+
                 etDocumento.text.clear()
                 etNombre.text.clear()
                 etApellido.text.clear()
@@ -269,5 +295,13 @@ class RegistroClienteActivity: AppCompatActivity() {
         }
     }
 
-
+    fun resaltarAlFoco(editText: EditText) {
+        editText.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                view.setBackgroundColor(ContextCompat.getColor(this, R.color.en_foco))
+            } else {
+                view.setBackgroundColor(ContextCompat.getColor(this, R.color.resaltado))
+            }
+        }
+    }
 }

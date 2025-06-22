@@ -7,4 +7,6 @@
     <color name="spinner_text_color">#F44336</color>
     <color name="resaltado_ingresar_datos_color">#C8F0A7</color>
     <color name="resaltado_ingresado_color">#00AAA3</color>
+    <color name="en_foco">#A4D0CD</color>
+    <color name="resaltado">#EEEEEE</color>
 </resources>

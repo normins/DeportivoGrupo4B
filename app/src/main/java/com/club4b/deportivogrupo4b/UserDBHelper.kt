@@ -154,7 +154,8 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
     fun obtenerClientes(): List<String> {
         val clientes = mutableListOf<String>()
         val db = readableDatabase
-        val cursor =db.rawQuery("SELECT nombre, apellido, nro_documento FROM clientes",null)
+        val cursor =db.rawQuery("SELECT nombre, apellido, nro_documento " +
+                "FROM clientes order by apellido, nombre",null)
         if (cursor.moveToFirst())
             do {
                 val nombre = cursor.getString(0)
