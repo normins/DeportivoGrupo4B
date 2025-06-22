@@ -105,32 +105,39 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
         db.execSQL(
             "INSERT INTO clientes( id_cliente, nro_documento, fecha_nacimiento," +
                     " nombre, apellido,fecha_inscripcion, apto_fisico, tipo_cliente," +
-                    " estado_carnet, esMoroso, actividad)"+
+                    " estado_carnet, esMoroso, actividad)" +
                     "VALUES (1, '35703124', '01/01/1990', 'Gilda', 'Morgante', " +
-                    "'01/01/2023', 1, 'Socio', 1, 0, 1000)")
+                    "'01/01/2023', 1, 'Socio', 1, 0, 1000)"
+        )
 
         db.execSQL(
             "INSERT INTO clientes( id_cliente, nro_documento, fecha_nacimiento," +
                     " nombre, apellido,fecha_inscripcion, apto_fisico, tipo_cliente," +
-                    " estado_carnet, esMoroso, actividad)"+
+                    " estado_carnet, esMoroso, actividad)" +
                     "VALUES (2, '25252525', '12/06/1994', 'Harry', 'Potter', " +
-                    "'01/01/2024', 1, 'Socio', 1, 0, 1000)")
+                    "'01/01/2024', 1, 'Socio', 1, 0, 1000)"
+        )
 
-        //para simular la busqueda en activity gestion de cobro y ver fecha de vto
+        //para simular la busqueda en activity vtos
 
         db.execSQL(
-            "INSERT INTO cobros(anio_id, mes_id, cliente_id,importe, fechaVencimiento, formapago, pagado)"
-                    + "VALUES (2025,06, 1,2000, '12/06/2025',0,2000)")
+            "INSERT INTO cobros (mes_id, cliente_id,importe, fechaVencimiento, formaPago,pagado)" +
+                    "VALUES(06,2,2000,21/06/2025,1,1)"
+        )
+
+
     }
 
-    fun insertarCliente (nombre: String, apellido:String, nroDocumento:String,
-                         fechaNacimiento:String, fechaInscripcion:String,
-                         aptoFisico:Int, tipoCliente:String,
-                         estadoCarnet:Int, esMoroso:Int, actividad:Int): Long {
+    fun insertarCliente(
+        nombre: String, apellido: String, nroDocumento: String,
+        fechaNacimiento: String, fechaInscripcion: String,
+        aptoFisico: Int, tipoCliente: String,
+        estadoCarnet: Int, esMoroso: Int, actividad: Int
+    ): Long {
 
 
         val db = writableDatabase
-        val valores = ContentValues().apply{
+        val valores = ContentValues().apply {
             put("nombre", nombre)
             put("apellido", apellido)
             put("nro_documento", nroDocumento)
@@ -154,7 +161,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
     fun obtenerClientes(): List<String> {
         val clientes = mutableListOf<String>()
         val db = readableDatabase
-        val cursor =db.rawQuery("SELECT nombre, apellido, nro_documento FROM clientes",null)
+        val cursor = db.rawQuery("SELECT nombre, apellido, nro_documento FROM clientes", null)
         if (cursor.moveToFirst())
             do {
                 val nombre = cursor.getString(0)
@@ -172,7 +179,7 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
         val actividades = mutableListOf<String>()
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT id, nombre, horario, precio FROM actividades", null)
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getString(0)
                 val nombre = cursor.getString(1)
@@ -188,12 +195,12 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
-            db.execSQL("DROP TABLE IF EXISTS usuarios")
-            db.execSQL("DROP TABLE IF EXISTS clientes")
-            db.execSQL("DROP TABLE IF EXISTS actividades")
-            db.execSQL("DROP TABLE IF EXISTS cobros")
-            onCreate(db)
-        }
+        db.execSQL("DROP TABLE IF EXISTS usuarios")
+        db.execSQL("DROP TABLE IF EXISTS clientes")
+        db.execSQL("DROP TABLE IF EXISTS actividades")
+        db.execSQL("DROP TABLE IF EXISTS cobros")
+        onCreate(db)
+    }
 
     fun login(nombre: String, contrasena: String): Boolean {
         val db = readableDatabase
@@ -210,46 +217,47 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
 
     fun validarClienteExistePorDocumento(documento: String): Boolean {
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT 1 FROM clientes WHERE nro_documento = ?", arrayOf(documento))
+        val cursor =
+            db.rawQuery("SELECT 1 FROM clientes WHERE nro_documento = ?", arrayOf(documento))
         val existe = cursor.moveToFirst()
         cursor.close()
         db.close()
         return existe
     }
 
-      fun insertarCobro(
-            anio: Int,
-            mes: Int,
-            cliente: Int,
-            importe: Double,
-            fechaVencimiento: String,
-            formaPago: Int,
-            pagado: Int
-        ): Boolean {
+    fun insertarCobro(
+        anio: Int,
+        mes: Int,
+        cliente: Int,
+        importe: Double,
+        fechaVencimiento: String,
+        formaPago: Int,
+        pagado: Int
+    ): Boolean {
 
-            val db = this.writableDatabase
+        val db = this.writableDatabase
 
 
-            val valores = ContentValues().apply {
-                put("anio_id", anio)
-                put("mes_id", mes)
-                put("cliente_id", cliente)
-                put("importe", importe)
-                put("fechaVencimiento", fechaVencimiento)
-                put("formaPago", formaPago)
-                put("pagado", pagado)
-            }
-
-            val resultado = db.insert("cobros", null, valores)
-            db.close()
-
-            return resultado != -1L
-
+        val valores = ContentValues().apply {
+            put("anio_id", anio)
+            put("mes_id", mes)
+            put("cliente_id", cliente)
+            put("importe", importe)
+            put("fechaVencimiento", fechaVencimiento)
+            put("formaPago", formaPago)
+            put("pagado", pagado)
         }
+
+        val resultado = db.insert("cobros", null, valores)
+        db.close()
+
+        return resultado != -1L
+
+    }
 
     // obtiene el vencimiento de cuotas diarias
 
-    fun listadoVencimientos (buscarFecha:String): List<Vencimiento> {
+    fun listadoVencimientos(buscarFecha: String): List<Vencimiento> {
 
         val lista = mutableListOf<Vencimiento>()
         val db = this.readableDatabase
@@ -279,6 +287,14 @@ class UserDBHelper(context: Context) : SQLiteOpenHelper(context, "4BClubDeportiv
         return lista
     }
 
+}
 
-    }
+    /*fun borrarTodosLosClientes() {
+        val db = writableDatabase
+        db.execSQL("DELETE FROM clientes")
+        db.close() */
+
+
+
+
 
