@@ -25,7 +25,7 @@ class GestionDeCobroActivity : AppCompatActivity() {
     private var mesCliente: Int = 0
     private var fechaUltimaVto: String = ""
     private var importe: Double = 0.0
-
+    private var tipo_cliente: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,25 +125,18 @@ class GestionDeCobroActivity : AppCompatActivity() {
         }
 
          val btnConfirmarCobro=findViewById<Button>(R.id.btnConfirmarCobro)
-         btnConfirmarCobro.setOnClickListener {
-
-            val spFormaPago = findViewById<Spinner>(R.id.spFormaPago)
+        btnConfirmarCobro.setOnClickListener {
             val formato = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-
-            // Parseo la fecha original
             val fecha = formato.parse(fechaUltimaVto)
 
             val calendar = Calendar.getInstance()
             calendar.time = fecha!!
 
-            // Sumo 31 días
-            calendar.add(Calendar.DAY_OF_YEAR, 31)
+            val diasAAgregar = if (tipo_cliente.equals("socio", ignoreCase = true)) 31 else 1
+            calendar.add(Calendar.DAY_OF_YEAR, diasAAgregar)
 
-            // Actualizo año y mes para la clave primaria
             anioCliente = calendar.get(Calendar.YEAR)
-            mesCliente = calendar.get(Calendar.MONTH) + 1  //  Enero es 0 en Calendar, sumamos 1
-
-            // Nueva fecha de vencimiento formateada para guardar en BD
+            mesCliente = calendar.get(Calendar.MONTH) + 1
             val fechaVencimiento = formato.format(calendar.time)
 
             val formaPago = spFormaPago.selectedItemPosition + 1

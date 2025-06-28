@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:hint="@string/seleccionar_fecha"
+            android:paddingStart="8dp"
             android:background="@drawable/edittext_border"
             android:focusable="false" />
 
